@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            background: #f0f0f1;
+            min-width: 0;
+            color: #3c434a;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+
+        }
+        .login_container {
+              margin: auto;
+              width: 320px;
+              padding: 49px 0px 0px;
+
+        }
+        .login_container h1 {
+            text-align: center;
+        }
+
+        .login_form{
+            margin-top: 20px;
+            margin-right: 0;
+            padding: 26px 24px 34px;
+            font-weight: 400;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #c3c4c7;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+        }
+        .links1{
+            margin: 16px 0px;
+            padding: 0px 24px;
+        }
+        .links {
+            margin-top: 24px;
+            padding: 0px 24px 0px;
+        }
+        .rememberme1{
+            display: flex;
+        }
+
+        form {
+            padding: 20px;
+        }
+        label, input[type="text"], input[type="password"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"], input[type="password"] {
+            width: 260px;
+            height: 30px;
+            padding: 3px 5px;
+            margin: 0px 0px 16px 6px;
+
+        }
+        input[type="submit"] {
+            width: 47px;
+            height: 32px;
+            background-color: #2271B1;
+            color: white;
+            padding: 0px 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 100px;
+        }
+
+        .language-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        .change-language {
+            float: right;
+            margin-top: 20px;
+        }
+        select {
+            width: 175px;
+            height: 30px;
+            padding: 0px 8px 0px 24px;
+            margin: 0 0 0 3px;
+            font-size: 17px;
+        }
+        .change-button {
+            background-color: white;
+            color: #2271B1;
+            padding: 0px 12px;
+            border-color: #2271B1;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-right: 5px;
+            width: 47px;
+            height: 30px;
+            font-size: 14px;
+        }
+        .error-message{
+            margin-top: 20px;
+            margin-right: 0;
+            padding: 26px 24px 34px;
+            font-weight: 400;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #c3c4c7;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+        }
+    </style>
+    <script>
+        document.getElementById(
+              "mySelect").selectedIndex = "2";
+        function change_language1 ()
+        {
+
+            let selectElement = document.getElementById('#mySelect').value;
+
+
+            if (selectElement === 'english' ){
+                // Change the language to English for the login form
+
+                document.querySelector('label[for="username"]').textContent = "Username or Email Address";
+                document.querySelector('label[for="password"]').textContent = "Password";
+                document.querySelector('label[for="rememberme"]').textContent = "remember me";
+                document.querySelector('.submit').value = "Login";
+
+                // Change the language for the links section
+                document.querySelector('.links a:first-child').textContent = "Signup";
+                document.querySelector('.links a:last-child').textContent = "Forgot your password?";
+                document.querySelector('.links1 a ').textContent = "→ go to film2serial";
+                document.querySelector('.change-button').value = "change";
+
+
+
+            }
+            else{
+                // Change the language to Persian for the login form
+                document.querySelector('label[for="username"]').textContent = "نام کاربری یا نشانی ایمیل";
+                document.querySelector('label[for="password"]').textContent = "رمز عبور";
+                document.querySelector('label[for="rememberme"]').textContent = "مرا به خاطر بسپار";
+                document.querySelector('.submit').value = "ورود";
+
+                // Change the language for the links section
+                document.querySelector('.links a:first-child').textContent = "نام‌نویسی";
+                document.querySelector('.links a:last-child').textContent = "رمز عبورتان را گم کرده‌اید؟";
+                document.querySelector('.links1 a ').textContent = "→ رفتن به فیلم تو سریال";
+                document.querySelector('.change-button').value = "تغییر";
+
+
+            }
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div class="login_container" id="login" >
+        <h1>
+            <a href="home">
+                <img src="\images\logo.png" alt="main logo" >
+            </a>
+        </h1>
+
+        {% if messages %}
+            {% for message in messages %}
+                <dive class="error-message">
+                <a>{{ message }}</a>
+                </dive>
+            {% endfor %}
+        {% endif %}
+        <form class="login_form" method="POST" action="{% url 'login' %}">
+            {% csrf_token %}
+            <dive class="input_group">
+                <label for="username">نام کاربری یا نشانی ایمیل</label>
+                <input type="text" id="username" name="username">
+                <label for="password">رمز عبور</label>
+                <input type="password" id="password" name="password">
+            </dive>
+
+            <dive class="rememberme1">
+                <input name="rememberme" type="checkbox" id="rememberme" value="forever">
+                <label for="rememberme">مرا به خاطر بسپار</label>
+                <input type="submit" class="btn btn-primary" value="ورود" name="loginbtn">
+            </dive>
+
+        </form>
+        <p class="links">
+            <a href="signup">نام‌نویسی</a> | <a href="forgot-password">رمز عبورتان را گم کرده‌اید؟</a>
+        </p>
+        <p class="links1">
+            <a href="home">→ رفتن به فیلم تو سریال</a>
+        </p>
+        <form class="language-form">
+            <select id="mySelect">
+                <option value="persian">فارسی</option>
+                <option value="english">English</option>
+            </select>
+            <input type="submit" class="change-button" value="تغییر" onclick="change_language1()">
+             
+        </form>
+
+    </div>
+</body>
+</html>
